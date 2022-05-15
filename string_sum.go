@@ -23,5 +23,19 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 func StringSum(input string) (output string, err error) {
+// if input is empty or whitespace
+	if input == "" || input == " " {
+		return "", errorEmptyInput
+	}
+	//solution with two numbers
+	a, err := strconv.Atoi("input")
+	if err != nil {
+		return "", err
+	}
+	b, err := strconv.Atoi("output")
+	if err != nil {
+		return "", err
+	}
+	return strconv.Itoa(a + b), nil
 	return "", nil
 }
