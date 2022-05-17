@@ -40,7 +40,7 @@ func StringSum(input string) (output string, err error) {
 		return "", fmt.Errorf("%w", errorIncorrectInput)
 	}
 	input = strings.ReplaceAll(input, " ", "")
-	input = strings.TrimSpace(input)
+	
 
 	return input, err
 
