@@ -43,15 +43,13 @@ func StringSum(input string) (output string, err error) {
 
 	return input, err
 
-}
-
-func MyStringSum(input, input1 string) (output string, err error) {
+	var input1 = strings.Fields(input)
 	//summation
-	x, err := strconv.Atoi(input)
+	x, err := strconv.Atoi(input1[0])
 	if err != nil {
 		return "", err
 	}
-	y, err := strconv.Atoi(input1)
+	y, err := strconv.Atoi(input1[1])
 	if err != nil {
 		return "", err
 	}
