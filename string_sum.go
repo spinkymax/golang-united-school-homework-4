@@ -46,12 +46,12 @@ func StringSum(input string) (output string, err error) {
 
 	x, myerr1 := strconv.Atoi(input1[0])
 	if myerr1 != nil {
-		return "", fmt.Errorf("an error  at first operand:%w", myerr1)
+		return "", fmt.Errorf("an error at the first operand:%w", myerr1)
 
 	}
 	y, myerr2 := strconv.Atoi(input1[1])
 	if myerr2 != nil {
-		return "", fmt.Errorf("an error  at second operand:%w", myerr2)
+		return "", fmt.Errorf("an error at the second operand:%w", myerr2)
 	}
 	output = strconv.Itoa(x + y)
 	return output, nil
