@@ -28,24 +28,27 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 func StringSum(input string) (output string, err error) {
-// if input is empty, has number of operands not equal to two or equals "+" and "-"
+        input = strings.ReplaceAll(input, " ", "")
+	input = strings.TrimSpace(input)
+
+	// if input is empty, has number of operands not equal to two or equals "+" and "-"
 
 	if input == "" || input == " " {
 		return "", fmt.Errorf("%w", errorEmptyInput)
 	}
-	if len(input) != 2 {
-		return "", fmt.Errorf("%w", errorNotTwoOperands)
-	}
+
 	if input == "+" || input == "-" {
 		return "", fmt.Errorf("%w", errorIncorrectInput)
 	}
-	input = strings.ReplaceAll(input, " ", "")
-	
-
 	return input, err
 
 	var input1 = strings.Fields(input)
+	if len(input1) != 2 {
+		return "", fmt.Errorf("%w", errorNotTwoOperands)
+	}
+
 	//summation
+
 	x, err := strconv.Atoi(input1[0])
 	if err != nil {
 		return "", err
@@ -54,8 +57,8 @@ func StringSum(input string) (output string, err error) {
 	if err != nil {
 		return "", err
 	}
-
-	return strconv.Itoa(x + y), nil
+	output = strconv.Itoa(x + y)
+	return output, nil
 
 }
 
