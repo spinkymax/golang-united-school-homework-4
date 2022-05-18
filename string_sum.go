@@ -54,19 +54,6 @@ func StringSum(input string) (output string, err error) {
 	return output, nil
 }
 
-func DeleteWhitespace(input string) (string, error) {
-	whitespace := ""
-	for _, i := range input {
-		if i != 32 {
-			whitespace = whitespace + string(input)
-		}
-	}
-	if len(whitespace) == 0 {
-		return "", fmt.Errorf("%w", errorEmptyInput)
-	}
-	return whitespace, nil
-}
-
 func Nums(input string) []string {
 	result := make([]string, 0)
 	for _, i := range input {
