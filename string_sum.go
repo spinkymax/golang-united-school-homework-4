@@ -26,11 +26,18 @@ func StringSum(input string) (output string, err error) {
 
 	input = strings.TrimSpace(input)
 
+	//if input has characters
+
+	for _, a := range input {
+		if !strings.Contains("0123456789+- ", string(a)) {
+			return "", fmt.Errorf("sorry, but: %w", errorIncorrectInput)
+		}
+	}
+
 	var input1 = strings.Fields(input)
 	if len(input1) != 2 {
 		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
-
 	//summation
 
 	x, myerr1 := strconv.Atoi(input1[0])
@@ -44,26 +51,40 @@ func StringSum(input string) (output string, err error) {
 	}
 	output = strconv.Itoa(x + y)
 
-	//if input has characters
-
-	for _, a := range input {
-		if !strings.Contains("0123456789+- ", string(a)) {
-			return "", fmt.Errorf("sorry, but: %w", errorIncorrectInput)
-		}
-	}
-
 	return output, nil
 }
 
-func NegNums(input string) []string {
-	result := make([]string, 0)
+func DeleteWhitespace(input string) (string, error) {
+	whitespace := ""
+	for _, i := range input {
+		if i != 32 {
+			whitespace = whitespace + string(input)
+		}
+	}
+	if len(whitespace) == 0 {
+		return "", fmt.Errorf("%w", errorEmptyInput)
+	}
+	return whitespace, nil
+}
 
-	len := ""
+func Nums(input string) []string {
+	result := make([]string, 0)
 	for _, i := range input {
 		if string(input[i]) == "-" || string(input[i]) == "+" {
-			len = len + "." + string(input[i])
+			result = append(result, string(input[i]))
+		}
+	}
+	return result
+}
+func Handling(input string) []string {
+	result := make([]string, 0)
+
+	str := ""
+	for _, i := range input {
+		if string(input[i]) == "-" || string(input[i]) == "+" {
+			str = str + "." + string(input[i])
 		} else {
-			len = len + string(input[i])
+			str = str + string(input[i])
 		}
 	}
 	return result
