@@ -14,65 +14,40 @@ var (
 	// Use when the expression has number of operands not equal to two
 	errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
 
-	errorIncorrectInput = errors.New("incorrect input")
-)
-
 func StringSum(input string) (output string, err error) {
-	// if input is empty, has number of operands not equal to two or equals "+" and "-"
+	input = strings.ReplaceAll(input, " ", "")
 
-	if input == "" || input == " " {
+	if len(input) == 0 {
 		return "", fmt.Errorf("%w", errorEmptyInput)
 	}
-
-	input = strings.TrimSpace(input)
-
-	//if input has characters
-
-	for _, a := range input {
-		if !strings.Contains("0123456789+- ", string(a)) {
-			return "", fmt.Errorf("sorry, but: %w", errorIncorrectInput)
-		}
-	}
-
-	var input1 = strings.Fields(input)
-	if len(input1) != 2 {
+	if Handling(input) != 2 {
 		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
-	//summation
 
-	x, err := strconv.Atoi(input1[0])
-	if err != nil {
-		return "", fmt.Errorf("the error at the first operand:%w", err)
-
+	input1 := strings.LastIndex(input, "+")
+	if input1 == -1 {
+		input1 = strings.LastIndex(input, "-")
 	}
-	y, err := strconv.Atoi(input1[1])
-	if err != nil {
-		return "", fmt.Errorf("the error at the second operand:%w", err)
-	}
-	output = strconv.Itoa(x + y)
 
-	return output, nil
+	x, err := strconv.Atoi(strings.TrimLeft(input[0:input1], "+"))
+	if err != nil {
+		return "", fmt.Errorf("failed to convert %q: %w", input[0:input1], err)
+	}
+	y, err := strconv.Atoi(strings.TrimLeft(input[input1:], "+"))
+	if err != nil {
+		return "", fmt.Errorf("failed to convert %q: %w", input[input1:], err)
+	}
+
+	return strconv.Itoa(x + y), nil
+
 }
 
-func Nums(input string) []string {
-	result := make([]string, 0)
-	for _, i := range input {
-		if string(input[i]) == "-" || string(input[i]) == "+" {
-			result = append(result, string(input[i]))
-		}
-	}
-	return result
-}
-func Handling(input string) []string {
-	result := make([]string, 0)
+func Handling(input string) (count int) {
+	input = strings.TrimLeft(input, "+")
+	input = strings.TrimLeft(input, "-")
 
-	str := ""
-	for _, i := range input {
-		if string(input[i]) == "-" || string(input[i]) == "+" {
-			str = str + "." + string(input[i])
-		} else {
-			str = str + string(input[i])
-		}
+	for _, a := range strings.Split(input, "-") {
+		count += len(strings.Split(a, "+"))
 	}
-	return result
+	return
 }
