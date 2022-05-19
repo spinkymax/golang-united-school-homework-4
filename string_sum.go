@@ -13,6 +13,7 @@ var (
 	errorEmptyInput = errors.New("input is empty")
 	// Use when the expression has number of operands not equal to two
 	errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
+)
 
 func StringSum(input string) (output string, err error) {
 	input = strings.ReplaceAll(input, " ", "")
@@ -31,11 +32,11 @@ func StringSum(input string) (output string, err error) {
 
 	x, err := strconv.Atoi(strings.TrimLeft(input[0:input1], "+"))
 	if err != nil {
-		return "", fmt.Errorf("failed to convert %q: %w", input[0:input1], err)
+		return "", fmt.Errorf("incorrect input: %w", input[0:input1], err)
 	}
 	y, err := strconv.Atoi(strings.TrimLeft(input[input1:], "+"))
 	if err != nil {
-		return "", fmt.Errorf("failed to convert %q: %w", input[input1:], err)
+		return "", fmt.Errorf("incorrect input: %w", input[input1:], err)
 	}
 
 	return strconv.Itoa(x + y), nil
