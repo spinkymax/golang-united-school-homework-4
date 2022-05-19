@@ -40,14 +40,14 @@ func StringSum(input string) (output string, err error) {
 	}
 	//summation
 
-	x, myerr1 := strconv.Atoi(input1[0])
-	if myerr1 != nil {
-		return "", fmt.Errorf("the error at the first operand:%w", myerr1)
+	x, err := strconv.Atoi(input1[0])
+	if err != nil {
+		return "", fmt.Errorf("the error at the first operand:%w", err)
 
 	}
-	y, myerr2 := strconv.Atoi(input1[1])
-	if myerr2 != nil {
-		return "", fmt.Errorf("the error at the second operand:%w", myerr2)
+	y, err := strconv.Atoi(input1[1])
+	if err != nil {
+		return "", fmt.Errorf("the error at the second operand:%w", err)
 	}
 	output = strconv.Itoa(x + y)
 
