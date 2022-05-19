@@ -25,18 +25,18 @@ func StringSum(input string) (output string, err error) {
 		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
 
+	var x, y int
+
 	input1 := strings.LastIndex(input, "+")
 	if input1 == -1 {
 		input1 = strings.LastIndex(input, "-")
 	}
 
-	x, err := strconv.Atoi(strings.TrimLeft(input[0:input1], "+"))
-	if err != nil {
-		return "", fmt.Errorf("incorrect input: %w", input[0:input1], err)
+	if x, err = strconv.Atoi(strings.TrimLeft(input[0:input1], "+")); err != nil {
+		return "", fmt.Errorf("incorrect input %q: %w", input[0:input1], err)
 	}
-	y, err := strconv.Atoi(strings.TrimLeft(input[input1:], "+"))
-	if err != nil {
-		return "", fmt.Errorf("incorrect input: %w", input[input1:], err)
+	if y, err = strconv.Atoi(strings.TrimLeft(input[input1:], "+")); err != nil {
+		return "", fmt.Errorf("incorrect input %q: %w", input[input1:], err)
 	}
 
 	return strconv.Itoa(x + y), nil
